@@ -11,7 +11,7 @@ echo -e "\e[33m>>>>>>Unzipping webserver content <<<<<<<\e[0m"
 cd /usr/share/nginx/html &>>/tmp/frontend-roboshop.log
 unzip /tmp/frontend.zip &>>/tmp/frontend-roboshop.log
 
-cp roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp /home/centos/Shop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 echo -e "\e[33m>>>>>>>>>>>>>>>>>Restarting Nginx Service<<<<<<<<<<<<<<<<<<<\e[0m"
 systemctl enable nginx &>>/tmp/frontend-roboshop.log
