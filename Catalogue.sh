@@ -21,7 +21,7 @@ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue
 
 echo -e "\e[33m>>>>> Changing Directory and Extracting Code content <<<<<\e[0m"
 cd /app &>>/tmp/catalogue-roboshop.log
-unzip /tmp/catalogue.zip &>>/tmp/catalogue-roboshop.log
+unzip -o /tmp/catalogue.zip  &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Downloading Dependencies <<<<<\e[0m"
 cd /app &>>/tmp/catalogue-roboshop.log
