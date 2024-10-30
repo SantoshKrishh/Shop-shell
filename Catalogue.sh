@@ -28,7 +28,7 @@ cd /app &>>/tmp/catalogue-roboshop.log
 npm install &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Replacing <MONGODB-SERVER-IPADDRESS> with IP address  <<<<<\e[0m"
-sed -i -e "s/<MONGODB-SERVER-IPADDRESS>/172.31.44.189/" /etc/systemd/system/catalogue.service &>>/tmp/catalogue-roboshop.log
+sed -i -e "s/<MONGODB-SERVER-IPADDRESS>/catalogue-dev.roboshopsk.shop/" /etc/systemd/system/catalogue.service &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Loading the service <<<<<\e[0m"
 systemctl daemon-reload &>>/tmp/catalogue-roboshop.log
@@ -45,5 +45,8 @@ dnf install mongodb-org-shell -y &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Loading master data  <<<<<\e[0m"
 mongo --host 172.31.44.189 </app/schema/catalogue.js &>>/tmp/catalogue-roboshop.log
+
+echo -e "\e[33m>>>>> Restarting the service <<<<<\e[0m"
+systemctl restart catalogue &>>/tmp/catalogue-roboshop.log
 
 
