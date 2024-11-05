@@ -44,7 +44,7 @@ echo -e "\e[33m>>>>> Installing Mongodb-client <<<<<\e[0m"
 dnf install mongodb-org-shell -y &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Loading master data  <<<<<\e[0m"
-mongo --host 172.31.44.189 </app/schema/catalogue.js &>>/tmp/catalogue-roboshop.log
+mongo --host mongodb.roboshopsk.shop </app/schema/catalogue.js &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Restarting the service <<<<<\e[0m"
 systemctl restart catalogue &>>/tmp/catalogue-roboshop.log
