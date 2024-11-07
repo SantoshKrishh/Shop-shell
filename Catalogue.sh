@@ -14,6 +14,7 @@ echo -e "\e[33m>>>>> Create Application user <<<<<\e[0m"
 useradd roboshop &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Creating App directory <<<<<\e[0m"
+rm -rf /app &>>/tmp/catalogue-roboshop.log
 mkdir /app &>>/tmp/catalogue-roboshop.log
 
 echo -e "\e[33m>>>>> Downloading Application Code <<<<<\e[0m"
