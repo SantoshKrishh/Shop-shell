@@ -2,7 +2,7 @@ echo -e "\e[33m>>>>> Disabling Mysql Default version <<<<<\e[0m"
 dnf module disable mysql -y &>>/tmp/mysql-roboshop.log
 
 echo -e "\e[33m>>>>> Copying repo file <<<<<\e[0m"
-cp /home/centos/Shop-shell/mysql.repo /etc/systemd/system/mysql.repo &>>/tmp/mysql-roboshop.log
+cp /home/centos/Shop-shell/mysql.repo /etc/yum.repos.d/mysql.repo &>>/tmp/mysql-roboshop.log
 
 echo -e "\e[33m>>>>> Install Mysql Community version<<<<<\e[0m"
 dnf install mysql-community-server -y &>>/tmp/mysql-roboshop.log
