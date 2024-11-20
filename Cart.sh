@@ -1,7 +1,7 @@
 #echo -e "\e[33m>>>>><<<<<\e[0m"
 
 echo -e "\e[33m>>>>> Copying service file <<<<<\e[0m"
-cp /home/centos/Shop-shell/cart.service /etc/systemd/system/cart.service
+cp /home/centos/Shop-shell/cart.service /etc/systemd/system/cart.service &>>/tmp/cart-roboshop.log
 
 echo -e "\e[33m>>>>> Enabling latest NOdejs <<<<<\e[0m"
 dnf module disable nodejs -y &>>/tmp/cart-roboshop.log
