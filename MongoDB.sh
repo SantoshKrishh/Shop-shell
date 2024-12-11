@@ -1,14 +1,17 @@
-#echo -e "\e[33m>>>>><<<<<\e[0m"
+#echo -e "${color} >>>>><<<<< ${nocolor}"
 
-echo -e "\e[33m>>>>> copying mongodb repo file <<<<<\e[0m"
-cp /home/centos/Shop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>/tmp/mongodb-roboshop.log
+source common.sh
 
-echo -e "\e[33m>>>>> Install MongoDB <<<<<\e[0m"
-dnf install mongodb-org -y &>>/tmp/mongodb-roboshop.log
 
-echo -e "\e[33m>>>>> update mongodb listen address <<<<<\e[0m"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>/tmp/mongodb-roboshop.log
+echo -e "${color} >>>>> copying mongodb repo file <<<<< ${nocolor}"
+cp /home/centos/Shop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
 
-echo -e "\e[33m>>>>> Start & Enable MongoDB Service <<<<<\e[0m"
-systemctl enable mongod &>>/tmp/mongodb-roboshop.log
-systemctl restart mongod &>>/tmp/mongodb-roboshop.log
+echo -e "${color} >>>>> Install MongoDB <<<<< ${nocolor}"
+dnf install mongodb-org -y &>>$log_file
+
+echo -e "${color} >>>>> update mongodb listen address <<<<< ${nocolor}"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$log_file
+
+echo -e "${color} >>>>> Start & Enable MongoDB Service <<<<< ${nocolor}"
+systemctl enable mongod &>>$log_file
+systemctl restart mongod &>>$log_file

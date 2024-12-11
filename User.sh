@@ -1,53 +1,56 @@
-#echo -e "\e[33m>>>>><<<<<\e[0m"
+#echo -e "${color} >>>>><<<<< ${nocolor}"
 
-echo -e "\e[33m>>>>> Copying service file <<<<<\e[0m"
+source common.sh
+component=user
+
+echo -e "${color} >>>>> Copying service file <<<<< ${nocolor}"
 cp /home/centos/Shop-shell/user.service /etc/systemd/system/user.service
 
-echo -e "\e[33m>>>>> Enabling latest NOdejs <<<<<\e[0m"
-dnf module disable nodejs -y &>>/tmp/user-roboshop.log
-dnf module enable nodejs:18 -y &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Enabling latest NOdejs <<<<< ${nocolor}"
+dnf module disable nodejs -y &>>$log_file
+dnf module enable nodejs:18 -y &>>$log_file
 
-echo -e "\e[33m>>>>> Installing NodeJS <<<<<\e[0m"
-dnf install nodejs -y &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Installing NodeJS <<<<< ${nocolor}"
+dnf install nodejs -y &>>$log_file
 
-echo -e "\e[33m>>>>> Create Application user <<<<<\e[0m"
-useradd roboshop &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Create Application user <<<<< ${nocolor}"
+useradd roboshop &>>$log_file
 
-echo -e "\e[33m>>>>> Creating App directory <<<<<\e[0m"
-rm -rf /app &>>/tmp/user-roboshop.log
-mkdir /app &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Creating App directory <<<<< ${nocolor}"
+rm -rf /app &>>$log_file
+mkdir /app &>>$log_file
 
-echo -e "\e[33m>>>>> Downloading Application Code <<<<<\e[0m"
-curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Downloading Application Code <<<<< ${nocolor}"
+curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip &>>$log_file
 
-echo -e "\e[33m>>>>> Changing Directory and Extracting Code content <<<<<\e[0m"
-cd /app &>>/tmp/user-roboshop.log
-unzip -o /tmp/user.zip  &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Changing Directory and Extracting Code content <<<<< ${nocolor}"
+cd /app &>>$log_file
+unzip -o /tmp/user.zip  &>>$log_file
 
-echo -e "\e[33m>>>>> Downloading Dependencies <<<<<\e[0m"
-cd /app &>>/tmp/user-roboshop.log
-npm install &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Downloading Dependencies <<<<< ${nocolor}"
+cd /app &>>$log_file
+npm install &>>$log_file
 
-echo -e "\e[33m>>>>> Replacing <MONGODB-SERVER-IPADDRESS> with IP address  <<<<<\e[0m"
-sed -i -e "s/<MONGODB-SERVER-IPADDRESS>/mongodb.roboshopsk.shop/" /etc/systemd/system/user.service &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Replacing <MONGODB-SERVER-IPADDRESS> with IP address  <<<<< ${nocolor}"
+sed -i -e "s/<MONGODB-SERVER-IPADDRESS>/mongodb.roboshopsk.shop/" /etc/systemd/system/user.service &>>$log_file
 
-echo -e "\e[33m>>>>> Loading the service <<<<<\e[0m"
-systemctl daemon-reload &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Loading the service <<<<< ${nocolor}"
+systemctl daemon-reload &>>$log_file
 
-echo -e "\e[33m>>>>> Starting the service <<<<<\e[0m"
-systemctl enable user &>>/tmp/user-roboshop.log
-systemctl start user &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Starting the service <<<<< ${nocolor}"
+systemctl enable user &>>$log_file
+systemctl start user &>>$log_file
 
-echo -e "\e[33m>>>>> copying mongodb repo file <<<<<\e[0m"
+echo -e "${color} >>>>> copying mongodb repo file <<<<< ${nocolor}"
 cp /home/centos/Shop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>/tmp/mongodb-roboshop.log
 
-echo -e "\e[33m>>>>> Installing Mongodb-client <<<<<\e[0m"
-dnf install mongodb-org-shell -y &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Installing Mongodb-client <<<<< ${nocolor}"
+dnf install mongodb-org-shell -y &>>$log_file
 
-echo -e "\e[33m>>>>> Loading master data  <<<<<\e[0m"
-mongo --host mongodb.roboshopsk.shop </app/schema/user.js &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Loading master data  <<<<< ${nocolor}"
+mongo --host mongodb.roboshopsk.shop </app/schema/user.js &>>$log_file
 
-echo -e "\e[33m>>>>> Restarting the service <<<<<\e[0m"
-systemctl restart user &>>/tmp/user-roboshop.log
+echo -e "${color} >>>>> Restarting the service <<<<< ${nocolor}"
+systemctl restart user &>>$log_file
 
 

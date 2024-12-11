@@ -1,21 +1,23 @@
-echo -e "\e[33m>>>>>>Install Nginx<<<<<<<<\e[0m"
-dnf install nginx -y &>>/tmp/frontend-roboshop.log
+source common.sh
 
-echo -e "\e[33m>>>>>>>removing Web server content<<<<<<<\e[0m"
-rm -rf /usr/share/nginx/html/* &>>/tmp/frontend-roboshop.log
+echo -e "${color} >>>>>>Install Nginx<<<<<<<< ${nocolor}"
+dnf install nginx -y &>>$log_file
 
-echo -e "\e[33m>>>>>>Downloading Roboshop webserver content<<<<<<<\e[0m"
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>/tmp/frontend-roboshop.log
+echo -e "${color} >>>>>>>removing Web server content<<<<<<< ${nocolor}"
+rm -rf /usr/share/nginx/html/* &>>$log_file
 
-echo -e "\e[33m>>>>>>Unzipping webserver content <<<<<<<\e[0m"
-cd /usr/share/nginx/html &>>/tmp/frontend-roboshop.log
-unzip /tmp/frontend.zip &>>/tmp/frontend-roboshop.log
+echo -e "${color} >>>>>>Downloading roboshop.log webserver content<<<<<<< ${nocolor}"
+curl -o /tmp/frontend.zip https://roboshop.log-artifacts.s3.amazonaws.com/frontend.zip &>>$log_file
 
-echo -e "\e[33m>>>>>>>copying conf file<<<<<<<<\e[0m"
-cp /home/centos/Shop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
+echo -e "${color} >>>>>>Unzipping webserver content <<<<<<< ${nocolor}"
+cd /usr/share/nginx/html &>>$log_file
+unzip /tmp/frontend.zip &>>$log_file
 
-echo -e "\e[33m>>>>>>>>>>>>>>>>>Restarting Nginx Service<<<<<<<<<<<<<<<<<<<\e[0m"
-systemctl enable nginx &>>/tmp/frontend-roboshop.log
-systemctl restart nginx &>>/tmp/frontend-roboshop.log
+echo -e "${color} >>>>>>>copying conf file<<<<<<<< ${nocolor}"
+cp /home/centos/Shop-shell/roboshop.log.conf /etc/nginx/default.d/roboshop.log.conf
 
-#echo -e "\e[33m\e[0m"
+echo -e "${color} >>>>>>>>>>>>>>>>>Restarting Nginx Service<<<<<<<<<<<<<<<<<<< ${nocolor}"
+systemctl enable nginx &>>$log_file
+systemctl restart nginx &>>$log_file
+
+#echo -e "${color}  ${nocolor}"
