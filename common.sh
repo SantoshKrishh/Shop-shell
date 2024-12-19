@@ -81,7 +81,7 @@ mongo_schema_setup() {
   stat_check $?
 
   echo -e "${color} Load Schema ${nocolor}"
-  mongo --host mongodb-dev.devopsb73.store <${app_path}/schema/$component.js  &>>$log_file
+  mongo --host mongodb.roboshopsk.shop <${app_path}/schema/$component.js  &>>$log_file
   stat_check $?
 }
 
@@ -91,7 +91,7 @@ mysql_schema_setup() {
   stat_check $?
 
   echo -e "${color} Load Schema ${nocolor}"
-  mysql -h mysql-dev.devopsb73.store -uroot -p${mysql_root_password} </app/schema/${component}.sql   &>>$log_file
+  mysql -h mysql.roboshopsk.shop -uroot -p${mysql_root_password} </app/schema/${component}.sql   &>>$log_file
   stat_check $?
 }
 
