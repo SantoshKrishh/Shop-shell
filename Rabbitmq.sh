@@ -1,5 +1,11 @@
 source common.sh
 
+root_password=$1
+if [ -z "$root_password" ]; then
+  echo "root_password is missing"
+  exit 1
+fi
+
 echo -e " ${color}  Configure Erlang repos  ${nocolor} "
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>/tmp/roboshop.log
 stat_check $?
@@ -18,6 +24,6 @@ systemctl restart rabbitmq-server &>>/tmp/roboshop.log
 stat_check $?
 
 echo -e " ${color}  Add RabbitMQ Application User ${nocolor} "
-rabbitmqctl add_user roboshop $1 &>>/tmp/roboshop.log
+rabbitmqctl add_user roboshop $root_password &>>/tmp/roboshop.log
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>/tmp/roboshop.log
 stat_check $?
