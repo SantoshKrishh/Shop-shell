@@ -19,7 +19,7 @@ stat_check $?
 
 
 echo -e "${color} Update Frontend Configuration ${nocolor}"
-cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>/tmp/roboshop.log
+cp /home/centos/Shop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>/tmp/roboshop.log
 stat_check $?
 
 echo -e "${color} Starting Nginx Server ${nocolor}"
