@@ -1,5 +1,11 @@
 source common.sh
 
+root_password=$1
+if [ -z "$root_password" ]; then
+  echo "root_password is missing"
+  exit 1
+fi
+
 echo -e " ${color}  Disable MySQL Default Version  ${nocolor} "
 yum module disable mysql -y &>>/tmp/roboshop.log
 stat_check $?
