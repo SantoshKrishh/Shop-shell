@@ -1,4 +1,6 @@
-color="\e[35m"
+#!/bin/bash
+
+color="\e[35m" # Magenta
 nocolor="\e[0m"
 log_file="/tmp/roboshop.log"
 app_path="/app"
