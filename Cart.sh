@@ -4,7 +4,6 @@ component=cart
 
 nodejs
 
-#this is to install the cart component
 
 
 
